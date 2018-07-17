@@ -6,7 +6,7 @@ class Model {
 
 	private $values = [];
 
-	public function setData($data)
+	public function setData($data = array())
 	{
 
 		foreach ($data as $key => $value)
@@ -16,6 +16,7 @@ class Model {
 
 		}
 
+		
 	}
 
 	public function __call($name, $args)
@@ -24,23 +25,25 @@ class Model {
 		$method = substr($name, 0, 3);
 		$fieldName = substr($name, 3, strlen($name));
 
-		if (in_array($fieldName, $this->fields))
-		{
+		//if (in_array($fieldName, $this->fields))
+		//{
 			
 			switch ($method)
 			{
 
 				case "get":
+					
 					return $this->values[$fieldName];
 				break;
 
 				case "set":
+
 					$this->values[$fieldName] = $args[0];
 				break;
 
 			}
 
-		}
+		//}
 
 	}
 
