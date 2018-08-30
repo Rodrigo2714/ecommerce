@@ -17,7 +17,7 @@ class User extends Model {
 
 	public static function login($login, $password):User
 	{
-
+		//echo "Passou User 1 <br>";
 		$db = new Sql();
 
 		$results = $db->select("SELECT * FROM tb_users WHERE deslogin = :LOGIN", array(
@@ -53,14 +53,14 @@ class User extends Model {
 
 	public static function logout()
 	{
-
+		//echo "Passou User 2 <br>";
 		$_SESSION[User::SESSION] = NULL;
 
 	}
 
 	public static function verifyLogin($inadmin = true)
 	{
-
+		//echo "Passou User 3 <br>";
 		if (
 			!isset($_SESSION[User::SESSION])
 			|| 
@@ -80,7 +80,7 @@ class User extends Model {
 
 	public static function listAll()
 	{
-
+		//echo "Passou User 4 <br>";
 		$sql = new Sql();
 
 		return $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
@@ -89,7 +89,7 @@ class User extends Model {
 
 	public function get($iduser)
 	{
-
+		//echo "Passou User 5 <br>";
 		$sql = new Sql();
 
 		$results = $sql->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser = :iduser", array(
@@ -103,7 +103,7 @@ class User extends Model {
 
 	public function save()
 	{
-
+		//echo "Passou User 6 <br>";
 		$sql = new Sql();
 
 		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
@@ -122,7 +122,7 @@ class User extends Model {
 
 	public function update()
 	{
-
+		//echo "Passou User 7 <br>";
 		$sql = new Sql();
 
 		$results = $sql->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
@@ -141,7 +141,7 @@ class User extends Model {
 
 	public function delete()
 	{
-
+		//echo "Passou User 8 <br>";
 		$sql = new Sql();
 
 		$sql->query("CALL sp_users_delete(:iduser)", array(
@@ -153,6 +153,7 @@ class User extends Model {
 	
 	public static function getForgot($email, $inadmin = true)
 	{
+		//echo "Passou User 9 <br>";
 		$sql = new Sql();
 		$results = $sql->select("
 			SELECT *
@@ -201,6 +202,10 @@ class User extends Model {
 
 	public static function validForgotDecrypt($result)
 	{
+		//echo "Passou User 10 <br>";
+
+		var_dump($result);exit;
+
 		$result = base64_decode($result);
 		$code = mb_substr($result, openssl_cipher_iv_length('aes-256-cbc'), null, '8bit');
 		$iv = mb_substr($result, 0, openssl_cipher_iv_length('aes-256-cbc'), '8bit');
@@ -232,7 +237,7 @@ class User extends Model {
 
 	public static function setForgotUsed($idrecovery)
 	{
-
+		//echo "Passou User 11 <br>";
 		$sql = new Sql();
 
 		$sql->query("UPDATE tb_userspasswordsrecoveries SET dtrecovery = NOW() WHERE idrecovery = :idrecovery", array(
@@ -243,7 +248,7 @@ class User extends Model {
 
 	public function setPassword($password)
 	{
-
+		//echo "Passou User 12 <br>";
 
 		$sql = new Sql();
 

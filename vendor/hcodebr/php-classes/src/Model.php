@@ -8,12 +8,12 @@ class Model {
 
 	public function setData($data = array())
 	{
-
+		//echo "Passou Model 1 <br>";
 		foreach ($data as $key => $value)
 		{
 
-			$this->{"set".$key}($value);
-
+			$this->{"set".$key}($value);			
+		
 		}
 
 		
@@ -21,13 +21,11 @@ class Model {
 
 	public function __call($name, $args)
 	{
-
+		
+		//echo "Passou Model 2 <br>";
 		$method = substr($name, 0, 3);
 		$fieldName = substr($name, 3, strlen($name));
 
-		//if (in_array($fieldName, $this->fields))
-		//{
-			
 			switch ($method)
 			{
 
@@ -38,7 +36,8 @@ class Model {
 
 				case "set":
 
-					$this->values[$fieldName] = $args[0];
+					$this->values[$fieldName] = $args[0];					
+
 				break;
 
 			}
@@ -49,7 +48,7 @@ class Model {
 
 	public function getValues()
 	{
-
+		//echo "Passou Model 3 <br>";
 		return $this->values;
 
 	}

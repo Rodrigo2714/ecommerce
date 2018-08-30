@@ -16,6 +16,7 @@ class Page {
 
 	public function __construct($opts = array(), $tpl_dir = "/views/")
 	{
+		//echo "Passou Page 1 <br>";
 
 		$this->options = array_merge($this->defaults, $opts);
 
@@ -25,6 +26,7 @@ class Page {
 		    "cache_dir"     => $_SERVER['DOCUMENT_ROOT']."/views-cache/",
 		    "debug"         => false
 		);
+
 
 		Tpl::configure( $config );
 
@@ -38,14 +40,14 @@ class Page {
 
 	public function __destruct()
 	{
-
+		//echo "Passou Page 2 <br>";
 		if ($this->options['footer'] === true) $this->tpl->draw("footer", false);
 
 	}
 
 	private function setData($data = array())
 	{
-
+		//echo "Passou Page 3 <br>";
 		foreach($data as $key => $val)
 		{
 
@@ -57,6 +59,7 @@ class Page {
 
 	public function setTpl($tplname, $data = array(), $returnHTML = false)
 	{
+		//echo "Passou Page 4 <br>";
 
 		$this->setData($data);
 
